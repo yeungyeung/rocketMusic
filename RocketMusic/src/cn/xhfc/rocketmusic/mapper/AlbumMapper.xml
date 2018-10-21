@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xhfc.rocketmusic.dao.AlbumMapper" >
+  <resultMap id="BaseResultMap" type="cn.xhfc.rocketmusic.entity.Album" >
+    <id column="al_id" property="alId" jdbcType="INTEGER" />
+    <result column="al_name" property="alName" jdbcType="VARCHAR" />
+    <result column="al_singer" property="alSinger" jdbcType="INTEGER" />
+    <result column="al_price" property="alPrice" jdbcType="REAL" />
+    <result column="al_picture" property="alPicture" jdbcType="VARCHAR" />
+    <result column="al_info" property="alInfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    al_id, al_name, al_singer, al_price, al_picture, al_info
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.xhfc.rocketmusic.entity.AlbumExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from album
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from album
+    where al_id = #{alId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from album
+    where al_id = #{alId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.xhfc.rocketmusic.entity.AlbumExample" >
+    delete from album
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.xhfc.rocketmusic.entity.Album" >
+    insert into album (al_id, al_name, al_singer, 
+      al_price, al_picture, al_info
+      )
+    values (#{alId,jdbcType=INTEGER}, #{alName,jdbcType=VARCHAR}, #{alSinger,jdbcType=INTEGER}, 
+      #{alPrice,jdbcType=REAL}, #{alPicture,jdbcType=VARCHAR}, #{alInfo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xhfc.rocketmusic.entity.Album" >
+    insert into album
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="alId != null" >
+        al_id,
+      </if>
+      <if test="alName != null" >
+        al_name,
+      </if>
+      <if test="alSinger != null" >
+        al_singer,
+      </if>
+      <if test="alPrice != null" >
+        al_price,
+      </if>
+      <if test="alPicture != null" >
+        al_picture,
+      </if>
+      <if test="alInfo != null" >
+        al_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="alId != null" >
+        #{alId,jdbcType=INTEGER},
+      </if>
+      <if test="alName != null" >
+        #{alName,jdbcType=VARCHAR},
+      </if>
+      <if test="alSinger != null" >
+        #{alSinger,jdbcType=INTEGER},
+      </if>
+      <if test="alPrice != null" >
+        #{alPrice,jdbcType=REAL},
+      </if>
+      <if test="alPicture != null" >
+        #{alPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="alInfo != null" >
+        #{alInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.xhfc.rocketmusic.entity.AlbumExample" resultType="java.lang.Integer" >
+    select count(*) from album
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update album
+    <set >
+      <if test="record.alId != null" >
+        al_id = #{record.alId,jdbcType=INTEGER},
+      </if>
+      <if test="record.alName != null" >
+        al_name = #{record.alName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alSinger != null" >
+        al_singer = #{record.alSinger,jdbcType=INTEGER},
+      </if>
+      <if test="record.alPrice != null" >
+        al_price = #{record.alPrice,jdbcType=REAL},
+      </if>
+      <if test="record.alPicture != null" >
+        al_picture = #{record.alPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alInfo != null" >
+        al_info = #{record.alInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update album
+    set al_id = #{record.alId,jdbcType=INTEGER},
+      al_name = #{record.alName,jdbcType=VARCHAR},
+      al_singer = #{record.alSinger,jdbcType=INTEGER},
+      al_price = #{record.alPrice,jdbcType=REAL},
+      al_picture = #{record.alPicture,jdbcType=VARCHAR},
+      al_info = #{record.alInfo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xhfc.rocketmusic.entity.Album" >
+    update album
+    <set >
+      <if test="alName != null" >
+        al_name = #{alName,jdbcType=VARCHAR},
+      </if>
+      <if test="alSinger != null" >
+        al_singer = #{alSinger,jdbcType=INTEGER},
+      </if>
+      <if test="alPrice != null" >
+        al_price = #{alPrice,jdbcType=REAL},
+      </if>
+      <if test="alPicture != null" >
+        al_picture = #{alPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="alInfo != null" >
+        al_info = #{alInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where al_id = #{alId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xhfc.rocketmusic.entity.Album" >
+    update album
+    set al_name = #{alName,jdbcType=VARCHAR},
+      al_singer = #{alSinger,jdbcType=INTEGER},
+      al_price = #{alPrice,jdbcType=REAL},
+      al_picture = #{alPicture,jdbcType=VARCHAR},
+      al_info = #{alInfo,jdbcType=VARCHAR}
+    where al_id = #{alId,jdbcType=INTEGER}
+  </update>
+</mapper>

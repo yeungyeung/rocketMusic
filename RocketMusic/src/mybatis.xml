@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="jdbc.properties"></properties>
+	<typeAliases> 
+		<typeAlias type="cn.xhfc.rocketmusic.entity.Admin" alias="admin" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.Album" alias="album" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.AlbumSong" alias="albumSong" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.Collect" alias="collect" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.Comment" alias="comment" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.Indent" alias="indent" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.ListSong" alias="listSong" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.Llist" alias="llist" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.Mv" alias="mv" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.Singer" alias="singer" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.Song" alias="song" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.Style" alias="style" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.StyleSong" alias="styleSong" />
+		<typeAlias type="cn.xhfc.rocketmusic.entity.User" alias="user" />
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="cn/xhfc/rocketmusic/mapper/AdminMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/AlbumMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/AlbumSongMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/CollectMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/CommentMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/IndentMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/ListSongMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/LlistMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/MvMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/SingerMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/SongMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/StyleMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/StyleSongMapper.xml" />
+		<mapper resource="cn/xhfc/rocketmusic/mapper/UserMapper.xml" />
+	
+	</mappers>
+</configuration>
